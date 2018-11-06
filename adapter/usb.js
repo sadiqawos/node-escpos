@@ -11,6 +11,7 @@ const EventEmitter  = require('events');
  */
 const IFACE_CLASS = {
   AUDIO  : 0x01,
+  VIRTUAL_COM: 0X02,
   HID    : 0x03,
   PRINTER: 0x07,
   HUB    : 0x09
@@ -63,7 +64,7 @@ USB.findPrinter = function(){
     try{
       return device.configDescriptor.interfaces.filter(function(iface){
         return iface.filter(function(conf){
-          return conf.bInterfaceClass === IFACE_CLASS.PRINTER;
+          return conf.bInterfaceClass === IFACE_CLASS.PRINTER || conf.bInterfaceClass === IFACE_CLASS.VIRTUAL_COM;
         }).length;
       }).length;
     }catch(e){
